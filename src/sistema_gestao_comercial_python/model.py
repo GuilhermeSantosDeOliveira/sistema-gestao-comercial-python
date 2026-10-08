@@ -3,27 +3,31 @@ class Pessoa:
         self.nome = nome
         self.cpf = cpf
 
-class Cliente(Pessoa):
-    def cliente(self , compra):
-        self.compra = compra
-
 class Fornecedor(Pessoa):
-    def Fornecedor(self , fproduto , id_fornecedor):
+    def Fornecedor(self , fproduto):
         self.fproduto = fproduto
-        self.id_fornecedor = id_fornecedor
+        
 
 class Funcionario(Pessoa):
-    def funcionario(self , setor , id_funcionario):
+    def funcionario(self , setor):
         self.setor = setor
-        self.id_funcionario = id_funcionario
+        
 
 class Categoria:
-    def categoria(self , categoria):
+    def categoria(self , categoria, cid):
         self.categoria = categoria
+        self.cid = cid
 
-class Produto(Categoria):
-    def produtos(self , produto , quantidade , valor ):
+class Produto:
+    def produtos(self , produto , quantidade , valor , pid ):
         self.produto = produto
         self.quantidade = quantidade
         self.valor = valor
+        self.pid = pid
+
+class venda:
+    def venda(self , data , vendas , vid):
+        self.vid = vid
+        self.data = data
+        self.vendas = vendas
 
