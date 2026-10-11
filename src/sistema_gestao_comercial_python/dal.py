@@ -5,8 +5,7 @@ import model
 
 
 class PessoaDal:
-    @classmethod
-    def converter(cls):
+    def converter():
         arquivo = Path(__file__).parent.parent.parent / "data"/"Pessoa.json"
         with open(arquivo , "r" ,encoding='utf-8') as arq:
             Pessoa = json.load(arq)
@@ -22,12 +21,18 @@ class PessoaDal:
 
     @classmethod
     def pesquisa(cls , cpf):
-        arquivo = Path(__file__).parent.parent.parent / "data"/"Pessoa.json"
-        with open(arquivo , "r" ,encoding='utf-8') as arq:
-            Pessoa = json.load(arq)
+        Pessoa = cls.converter()
         for i in Pessoa:
             if i["cpf"] == cpf:
                 return i
+
+    @classmethod
+    def editar(cls , nome , cpf):
+        Pessoa = cls.converter()
+        lupa = cls.pesquisa()
+        
+
+
 
 
 
