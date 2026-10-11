@@ -16,13 +16,27 @@ class PessoaDal:
     def salvar(cls , pessoa:model.Pessoa):
         arquivo = Path(__file__).parent.parent.parent / "data"/"Pessoa.json"
         with open(arquivo , "w" ,encoding='utf-8') as arq:
-            json.dump(arq,indent=4 ,ensure_ascii=False)
+            json.dump(
+                {"nome":pessoa.nome , "cpf" :pessoa.cpf},
+                arq,indent=4 ,ensure_ascii=False)
 
     @classmethod
-    def pesquisar(cls):
-        pessoa = cls.converter()
-    
+    def pesquisa(cls , cpf):
+        arquivo = Path(__file__).parent.parent.parent / "data"/"Pessoa.json"
+        with open(arquivo , "r" ,encoding='utf-8') as arq:
+            Pessoa = json.load(arq)
+        for i in Pessoa:
+            if i["cpf"] == cpf:
+                return i
 
+
+
+
+
+
+
+
+            
 class FornecedorDal:
     arquivo = Path(__file__).parent.parent.parent / "data"/"Fornecedor.json"
 
