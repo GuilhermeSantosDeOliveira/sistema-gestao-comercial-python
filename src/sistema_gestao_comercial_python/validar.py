@@ -28,20 +28,16 @@ def validar_cpf(cpf):
 
 
 def validar_nome(nome: str) -> bool:
-    # 1. Remove espaços extras no início e fim
+
     nome = nome.strip()
-    
-    # 2. Verifica se o nome tem pelo menos um sobrenome (mínimo de duas palavras)
+
     partes = nome.split()
     if len(partes) < 2:
-        return False  # Inválido: apenas "João" ou vazio
+        return False 
         
-    # 3. Verifica o tamanho total (mínimo de 5 caracteres somando tudo)
     if len(nome) < 5:
         return False
 
-    # 4. Regex: Aceita apenas letras (incluindo acentos), espaços e apóstrofos
-    # Não aceita números (123) nem caracteres especiais (@, #, $)
     padrao = r"^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ'\s]+$"
     
     if not re.match(padrao, nome):  # noqa: SIM103

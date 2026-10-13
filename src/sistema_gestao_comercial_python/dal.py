@@ -20,21 +20,25 @@ class PessoaDal:
                 arq,indent=4 ,ensure_ascii=False)
 
     @classmethod
-    def pesquisa(cls , cpf):
-        Pessoa = cls.converter()
-        for i in Pessoa:
+    def pesquisa(cls , cpf:str , lista=None):
+        if lista == None:
+            lista = cls.converter()
+        for i in lista:
             if i["cpf"] == cpf:
-                return i
+                    return i
 
     @classmethod
-    def editar(cls , nome , cpf):
-        Pessoa = cls.converter()
-        lupa = cls.pesquisa()
-        
-
-
-
-
+    def editar(cls , lupa , nome , cpf):
+        pessoa = cls.converter()
+        i = cls.pesquisa(lupa["cpf"] , pessoa)
+        if i == None:
+            return
+        else:
+            i["nome"] = nome
+            i["cpf"] = cpf
+        arquivo = Path(__file__).parent.parent.parent / "data"/"Pessoa.json"
+        with open(arquivo , "w" ,encoding='utf-8') as arq:
+            json.dump(pessoa , arq , indent=4 ,ensure_ascii=False)
 
 
 
