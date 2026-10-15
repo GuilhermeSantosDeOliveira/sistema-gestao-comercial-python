@@ -18,5 +18,13 @@ class PessoaController:
 
     @classmethod
     def editar(cls , lupa , nome , cpf):
-        dal.PessoaDal.editar(lupa , nome , cpf)
-        return True
+        if validar.validar_cpf(cpf) == True and validar.validar_nome(nome) == True:
+            dal.PessoaDal.editar(lupa , nome , cpf)
+            return True
+        else:return False
+
+    @classmethod
+    def excluir(cls , cpf):
+        if dal.PessoaDal.excluir(cpf) == True:  # noqa: SIM103
+            return True
+        else:return False

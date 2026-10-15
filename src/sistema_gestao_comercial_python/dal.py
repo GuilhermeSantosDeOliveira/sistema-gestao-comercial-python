@@ -40,8 +40,19 @@ class PessoaDal:
         with open(arquivo , "w" ,encoding='utf-8') as arq:
             json.dump(pessoa , arq , indent=4 ,ensure_ascii=False)
 
-
-
+    @classmethod
+    def excluir(cls , cpf):
+        pessoa = cls.converter()
+        i = cls.pesquisa(cpf, pessoa)
+        if i == None:
+            return False
+        else:
+            p= pessoa.index(i)
+            del pessoa[p]
+        arquivo = Path(__file__).parent.parent.parent / "data"/"Pessoa.json"
+        with open(arquivo , "w" ,encoding='utf-8') as arq:
+            json.dump(pessoa , arq , indent=4 ,ensure_ascii=False)
+        return True
 
 
 
