@@ -14,10 +14,11 @@ class PessoaDal:
     @classmethod
     def salvar(cls , pessoa:model.Pessoa):
         arquivo = Path(__file__).parent.parent.parent / "data"/"Pessoa.json"
+        Pessoa = cls.converter()
+        p = {"nome":pessoa.nome , "cpf" :pessoa.cpf}
+        Pessoa.append(p)
         with open(arquivo , "w" ,encoding='utf-8') as arq:
-            json.dump(
-                {"nome":pessoa.nome , "cpf" :pessoa.cpf},
-                arq,indent=4 ,ensure_ascii=False)
+            json.dump(Pessoa,arq,indent=4 ,ensure_ascii=False)
 
     @classmethod
     def pesquisa(cls , cpf:str , lista=None):

@@ -7,6 +7,8 @@ class PessoaController:
 
     @classmethod
     def cadastrar(cls , nome , cpf):
+        if dal.PessoaDal.pesquisa(cpf) is not None:
+            return False
         if validar.validar_cpf(cpf) == True and validar.validar_nome(nome) ==True:
             dal.PessoaDal.salvar(model.Pessoa(nome , cpf))
             return True

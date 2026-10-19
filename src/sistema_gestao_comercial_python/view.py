@@ -31,8 +31,10 @@ def pessoas():
                 if confirme == 1:
                     if controller.PessoaController.cadastrar(nome , cpf) == True:
                         print(f"o nome: {nome} pertencente ao cpf: {cpf} foi cadastrado com sucesso")
+                        break
                     else:
                         print("o cadastro falhou")
+                        break
                 elif confirme==2:
                     print("OK! , você está sendo redirecionado para o Menu pessoas")
                     break
