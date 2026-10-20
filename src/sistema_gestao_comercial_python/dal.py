@@ -59,15 +59,15 @@ class PessoaDal:
 class FornecedorDal:
     #vou deixar fornecedor assim por hora e mecher nele depois
 
-    def converter():
+    def fornecedor_converter():
             fornecedor_arquivo = Path(__file__).parent.parent.parent / "data"/"Fornecedor.json"
             with open(fornecedor_arquivo , "r" ,encoding='utf-8') as arq:
                 fornecedor = json.load(arq)
                 return fornecedor
-
-    def salvar(cls , fornecedor:model.Fornecedor ):
+    @classmethod
+    def fornecedor_salvar(cls , fornecedor:model.Fornecedor ):
             fornecedor_arquivo = Path(__file__).parent.parent.parent / "data"/"Fornecedor.json"
-            Fornecedor = cls.converter()
+            Fornecedor = cls.fornecedor_converter()
             f = {"nome":fornecedor.nome , "cpf" :fornecedor.cpf}
             Fornecedor.append(f)
             with open(fornecedor_arquivo , "w" ,encoding='utf-8') as arq:
@@ -75,22 +75,58 @@ class FornecedorDal:
     
 class FuncionarioDal:
     arquivo = Path(__file__).parent.parent.parent / "data"/"Funcionario.json"
-    
 
 class CategoriaDal:
-    def converter():
+
+    def categoria_converter():
         categoria_arquivo = Path(__file__).parent.parent.parent / "data"/"Categoria.json"
         with open(categoria_arquivo , "r" ,encoding='utf-8') as arq:
             categoria = json.load(arq)
             return categoria
-        
-    def salvar(cls , categoria:model.Categoria ):
+
+    @classmethod
+    def categoria_salvar(cls , categoria:model.Categoria ):
         categoria_arquivo = Path(__file__).parent.parent.parent / "data"/"Categoria.json"
-        Fornecedor = cls.converter()
-        f = {"categoria":categoria.categoria , "cid" :categoria.cid}
-        Fornecedor.append(f)
+        Categoria = cls.categoria_converter()
+        c = {"categoria":categoria.categoria , "cid" :categoria.cid}
+        Categoria.append(c)
         with open(categoria_arquivo , "w" ,encoding='utf-8') as arq:
-            json.dump(Fornecedor,arq,indent=4 ,ensure_ascii=False)
+            json.dump(Categoria,arq,indent=4 ,ensure_ascii=False)
+
+    @classmethod
+    def categoria_pesquisa(cls , cid:str , lista=None):
+        if lista == None:
+            lista = cls.categoria_converter()
+        for i in lista:
+            if i["cid"] == cid:
+                return i
+    
+    @classmethod
+    def categoria_editar(cls , lupa , categoria , cid):
+        Categoria = cls.categoria_converter()
+        i = cls.categoria_pesquisa(lupa["cid"] , Categoria)
+        if i == None:
+            return
+        else:
+            i["categoria"] = categoria
+            i["cid"] = cid
+        categoria_arquivo = Path(__file__).parent.parent.parent / "data"/"Categoria.json"
+        with open(categoria_arquivo , "w" ,encoding='utf-8') as arq:
+            json.dump(Categoria , arq , indent=4 ,ensure_ascii=False)
+    
+    @classmethod
+    def excluir(cls , cid):
+        categoria = cls.categoria_converter()
+        i = cls.categoria_pesquisa(cid, categoria)
+        if i == None:
+            return False
+        else:
+            p= categoria.index(i)
+            del categoria[p]
+        categoria_arquivo = Path(__file__).parent.parent.parent / "data"/"Categoria.json"
+        with open(categoria_arquivo , "w" ,encoding='utf-8') as arq:
+            json.dump(categoria , arq , indent=4 ,ensure_ascii=False)
+        return True
 
 class ProdutoDal:
     arquivo = Path(__file__).parent.parent.parent / "data"/"Produto.json"
