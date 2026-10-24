@@ -1,3 +1,4 @@
+import random
 import re
 
 
@@ -44,3 +45,8 @@ def validar_nome(nome: str) -> bool:
         return False
         
     return True
+
+def criar_id():
+    id = f"{random.randint(0 , 99999):05d}"
+    return id
+

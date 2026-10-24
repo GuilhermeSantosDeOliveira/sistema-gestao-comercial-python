@@ -114,6 +114,7 @@ class FuncionarioDal:
 
 class CategoriaDal:
 
+    
     def categoria_converter():
         categoria_arquivo = Path(__file__).parent.parent.parent / "data"/"Categoria.json"
         with open(categoria_arquivo , "r" ,encoding='utf-8') as arq:
