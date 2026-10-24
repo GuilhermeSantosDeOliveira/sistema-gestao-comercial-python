@@ -5,12 +5,13 @@ class Pessoa:
 
 class Fornecedor(Pessoa):
     #fproduto é o produto que o fornecedor fornece
-    def __init__(self , fproduto):
+    def __init__(self , nome , cpf , fproduto):
+        super().__init__(nome , cpf)
         self.fproduto = fproduto
         
-
 class Funcionario(Pessoa):
-    def funcionario(self , setor):
+    def funcionario(self ,nome , cpf , setor):
+        super().__init__(nome , cpf)
         self.setor = setor
         
 

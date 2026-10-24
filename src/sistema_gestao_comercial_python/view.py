@@ -26,7 +26,7 @@ def pessoas():
                     break
             elif desicao == 2:
                 nome = input("digite o nome que deseja cadastrar: ")
-                cpf = (input("digite o cpf da pessoa que deseja cadastrar: "))
+                cpf = input("digite o cpf da pessoa que deseja cadastrar: ")
                 confirme = int(input(f"verifique as informações:\n o nome é : {nome} \n o cpf é : {cpf} \n digite 1 para confirmar ou 2 para  recusar: "))
                 if confirme == 1:
                     if controller.PessoaController.cadastrar(nome , cpf) == True:
