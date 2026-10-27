@@ -1,7 +1,6 @@
 import dal
 import model
-
-from sistema_gestao_comercial_python import utilidades
+import utilidades
 
 
 class PessoaController:
@@ -60,4 +59,31 @@ class FornecedorController:
         else:return False
 
 class CategoriaController:
-    pass
+    def criar_cid():
+        while True:
+            cid = utilidades.criar_id()
+            if dal.CategoriaDal.categoria_pesquisa(cid) == None:
+                return cid
+
+    @classmethod
+    def cadastrar_categoria(cls , nome , cpf):
+        cid = cls.criar_cid()
+        dal.CategoriaDal.categoria_salvar(model.Categoria(nome , cpf))
+        return cid
+
+    @classmethod
+    def pesquisa_categoria(cls , cid:str):
+        return dal.CategoriaDal.categoria_pesquisa(cid)
+
+    @classmethod
+    def editar_categoria(cls ,lupa ,categoria , cid):
+        dal.CategoriaDal.categoria_editar(lupa ,categoria , cid)
+        return True
+
+    @classmethod
+    def excluir_categoria(cls ,cid):
+        if dal.CategoriaDal.categoria_excluir(cid) == True:  # noqa: SIM103
+            return True
+        else:return False
+
+

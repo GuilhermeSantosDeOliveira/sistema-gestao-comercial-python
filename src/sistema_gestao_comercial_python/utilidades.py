@@ -27,7 +27,6 @@ def validar_cpf(cpf):
         return True
     return False
 
-
 def validar_nome(nome: str) -> bool:
 
     nome = nome.strip()
