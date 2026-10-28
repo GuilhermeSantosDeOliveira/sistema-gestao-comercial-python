@@ -253,7 +253,29 @@ class ProdutoDal:
     @classmethod
     def produto_excluir(cls , pid):
         produto = cls.converter()
-        i = cls.funcionario_pesquisa(pid, produto)
+        i = cls.produto_pesquisa(pid, produto)
+        if i == None:
+            return False
+        else:
+            p= produto.index(i)
+            del produto[p]
+        funcionario_arquivo = Path(__file__).parent.parent.parent / "data"/"Produto.json"
+        with open(funcionario_arquivo , "w" ,encoding='utf-8') as arq:
+            json.dump(produto , arq , indent=4 ,ensure_ascii=False)
+        return True
+
+    #essa é uma parte do codigo da classe produto que remete diretamente a classe categoria e serve para auxilio em uma parte do codigo da controller
+    @classmethod
+    def lista_exclusao(cls , cp , lista=None):
+        if lista == None:
+            lista = cls.converter()
+        for i in lista:
+            if i["cp"] == cp:
+                return i
+    @classmethod
+    def exclusao(cls , cp):
+        produto = cls.converter()
+        i = cls.lista_exclusao(cp, produto)
         if i == None:
             return False
         else:

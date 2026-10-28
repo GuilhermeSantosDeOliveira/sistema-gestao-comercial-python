@@ -82,10 +82,17 @@ class CategoriaController:
 
     @classmethod
     def excluir_categoria(cls ,cid):
-        if dal.CategoriaDal.categoria_excluir(cid) == True:  # noqa: SIM103
+        if dal.CategoriaDal.categoria_excluir(cid) == True:
+            while True:
+                x = dal.ProdutoDal.exclusao(cid)
+                if x == False:
+                    break
+                else:
+                    pass
             return True
         else:return False
 
+CategoriaController.excluir_categoria("38108")
 class ProdutoController:
     def criar_pid():
         while True:
