@@ -23,11 +23,13 @@ class Categoria:
 
 class Produto:
     #pid é o id do produto
-    def __init__(self , produto , quantidade , valor , pid ):
+    #cp é a categoria pertencente
+    def __init__(self , produto , quantidade , valor , pid , cp):
         self.produto = produto
         self.quantidade = quantidade
         self.valor = valor
         self.pid = pid
+        self.cp = cp
 
 class venda:
     #vid é o ID da venda 

@@ -53,9 +53,8 @@ class PessoaDal:
         pessoa_arquivo = Path(__file__).parent.parent.parent / "data"/"Pessoa.json"
         with open(pessoa_arquivo , "w" ,encoding='utf-8') as arq:
             json.dump(pessoa , arq , indent=4 ,ensure_ascii=False)
-        return True
+        return True         
 
-            
 class FornecedorDal:
 
     def fornecedor_converter():
@@ -110,7 +109,56 @@ class FornecedorDal:
         return True
         
 class FuncionarioDal:
-    arquivo = Path(__file__).parent.parent.parent / "data"/"Funcionario.json"
+    def converter():
+            funcionario_arquivo = Path(__file__).parent.parent.parent / "data"/"Funcionario.json"
+            with open(funcionario_arquivo, "r" ,encoding='utf-8') as arq:
+                funcionario = json.load(arq)
+                return funcionario
+
+    @classmethod
+    def salvar(cls , funcionario:model.Funcionario):
+        funcionario_arquivo = Path(__file__).parent.parent.parent / "data"/"Funcionario.json"
+        Funcionario = cls.converter()
+        f = {"nome":funcionario.nome , "cpf" :funcionario.cpf , "setor":funcionario.setor}
+        Funcionario.append(f)
+        with open(funcionario_arquivo , "w" ,encoding='utf-8') as arq:
+            json.dump(Funcionario,arq,indent=4 ,ensure_ascii=False)
+
+    @classmethod
+    def funcionario_pesquisa(cls , cpf:str , lista=None):
+        if lista == None:
+            lista = cls.converter()
+        for i in lista:
+            if i["cpf"] == cpf:
+                    return i
+
+    @classmethod
+    def funcionario_editar(cls , lupa , nome , cpf, setor):
+        funcionario = cls.converter()
+        i = cls.funcionario_pesquisa(lupa["cpf"] , funcionario)
+        if i == None:
+            return
+        else:
+            i["nome"] = nome
+            i["cpf"] = cpf
+            i["setor"]= setor
+        funcionario_arquivo = Path(__file__).parent.parent.parent / "data"/"Funcionario.json"
+        with open(funcionario_arquivo , "w" ,encoding='utf-8') as arq:
+            json.dump(funcionario , arq , indent=4 ,ensure_ascii=False)
+
+    @classmethod
+    def funcionario_excluir(cls , cpf):
+        funcionario = cls.converter()
+        i = cls.funcionario_pesquisa(cpf, funcionario)
+        if i == None:
+            return False
+        else:
+            f= funcionario.index(i)
+            del funcionario[f]
+        funcionario_arquivo = Path(__file__).parent.parent.parent / "data"/"Funcionario.json"
+        with open(funcionario_arquivo , "w" ,encoding='utf-8') as arq:
+            json.dump(funcionario , arq , indent=4 ,ensure_ascii=False)
+        return True
 
 class CategoriaDal:
 
@@ -139,14 +187,13 @@ class CategoriaDal:
                 return i
     
     @classmethod
-    def categoria_editar(cls , lupa , categoria , cid):
+    def categoria_editar(cls , lupa , categoria):
         Categoria = cls.categoria_converter()
         i = cls.categoria_pesquisa(lupa["cid"] , Categoria)
         if i == None:
             return
         else:
             i["categoria"] = categoria
-            i["cid"] = cid
         categoria_arquivo = Path(__file__).parent.parent.parent / "data"/"Categoria.json"
         with open(categoria_arquivo , "w" ,encoding='utf-8') as arq:
             json.dump(Categoria , arq , indent=4 ,ensure_ascii=False)
@@ -166,7 +213,59 @@ class CategoriaDal:
         return True
     
 class ProdutoDal:
-    arquivo = Path(__file__).parent.parent.parent / "data"/"Produto.json"
+    def converter():
+            produto_arquivo = Path(__file__).parent.parent.parent / "data"/"Produto.json"
+            with open(produto_arquivo , "r" ,encoding='utf-8') as arq:
+                produto = json.load(arq)
+                return produto
+    @classmethod
+    def produto_salvar(cls , produto:model.Produto):
+        produto_arquivo = Path(__file__).parent.parent.parent / "data"/"Produto.json"
+        Produto = cls.converter()
+        p = {"produto":produto.produto , "quantidade" :produto.quantidade , "valor" : produto.valor , "pid": produto.pid , "categoria": produto.cp}
+        Produto.append(p)
+        with open(produto_arquivo , "w" ,encoding='utf-8') as arq:
+            json.dump(Produto,arq,indent=4 ,ensure_ascii=False)
+
+    @classmethod
+    def produto_pesquisa(cls , pid:str , lista=None):
+        if lista == None:
+            lista = cls.converter()
+        for i in lista:
+            if i["pid"] == pid:
+                return i
+
+    @classmethod
+    def produto_editar(cls , lupa , produto , quantidade, valor ,cp):
+        Produto = cls.converter()
+        i = cls.produto_pesquisa(lupa["pid"] , Produto)
+        if i == None:
+            return
+        else:
+            i["produto"] = produto
+            i["quantidade"] = quantidade
+            i["valor"]= valor
+            i["cp"]=cp
+        produto_arquivo = Path(__file__).parent.parent.parent / "data"/"Produto.json"
+        with open(produto_arquivo , "w" ,encoding='utf-8') as arq:
+            json.dump(Produto , arq , indent=4 ,ensure_ascii=False)
+
+    @classmethod
+    def produto_excluir(cls , pid):
+        produto = cls.converter()
+        i = cls.funcionario_pesquisa(pid, produto)
+        if i == None:
+            return False
+        else:
+            p= produto.index(i)
+            del produto[p]
+        funcionario_arquivo = Path(__file__).parent.parent.parent / "data"/"Produto.json"
+        with open(funcionario_arquivo , "w" ,encoding='utf-8') as arq:
+            json.dump(produto , arq , indent=4 ,ensure_ascii=False)
+        return True
+
 
 class VendaDal:
     arquivo = Path(__file__).parent.parent.parent / "data"/"Venda.json"
+
+

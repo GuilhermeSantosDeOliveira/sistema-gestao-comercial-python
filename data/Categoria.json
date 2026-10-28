@@ -1,6 +1,22 @@
 [
     {
-        "categoria": "limpeza",
+        "categoria": "eletronicos",
         "cid": "52551"
+    },
+    {
+        "categoria": "limpeza",
+        "cid": "38108"
+    },
+    {
+        "categoria": "doces",
+        "cid": "85213"
+    },
+    {
+        "categoria": "salgados",
+        "cid": "38914"
+    },
+    {
+        "categoria": "bebidas",
+        "cid": "25125"
     }
 ]

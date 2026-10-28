@@ -66,18 +66,18 @@ class CategoriaController:
                 return cid
 
     @classmethod
-    def cadastrar_categoria(cls , nome , cpf):
+    def cadastrar_categoria(cls , categoria):
         cid = cls.criar_cid()
-        dal.CategoriaDal.categoria_salvar(model.Categoria(nome , cpf))
-        return cid
+        dal.CategoriaDal.categoria_salvar(model.Categoria(categoria , cid))
+        return True
 
     @classmethod
     def pesquisa_categoria(cls , cid:str):
         return dal.CategoriaDal.categoria_pesquisa(cid)
 
     @classmethod
-    def editar_categoria(cls ,lupa ,categoria , cid):
-        dal.CategoriaDal.categoria_editar(lupa ,categoria , cid)
+    def editar_categoria(cls ,lupa ,categoria):
+        dal.CategoriaDal.categoria_editar(lupa ,categoria)
         return True
 
     @classmethod
@@ -86,4 +86,66 @@ class CategoriaController:
             return True
         else:return False
 
+class ProdutoController:
+    def criar_pid():
+        while True:
+            pid = utilidades.criar_id()
+            if dal.ProdutoDal.produto_pesquisa(pid) == None:
+                return pid
+            
+    @classmethod
+    def cadastrar_produto(cls ,  produto , quantidade , valor , cp):
+        pid = cls.criar_pid()
+        x = dal.CategoriaDal.categoria_pesquisa(cp)
+        if x == None:
+            return False
+        elif x != None:
+            dal.ProdutoDal.produto_salvar(model.Produto(produto , quantidade , valor , pid , cp))
+            return True
 
+    @classmethod
+    def pesquisa_produto(cls , pid:str):
+        return dal.ProdutoDal.produto_pesquisa(pid)
+
+    @classmethod
+    def editar_produto(cls ,lupa ,produto , quantidade, valor ,cp):
+        x=dal.CategoriaDal.categoria_pesquisa(cp)
+        if x == None:
+            return False
+        if x !=None:
+            dal.ProdutoDal.produto_editar(lupa ,produto , quantidade, valor ,cp)
+            return True
+
+    @classmethod
+    def excluir_produto(cls ,pid):
+        if dal.ProdutoDal.produto_excluir(pid) == True:  # noqa: SIM103
+            return True
+        else:return False
+
+class FuncionarioController:
+
+    @classmethod
+    def cadastrar_funcionario(cls , nome , cpf , setor):
+        if dal.FuncionarioDal.funcionario_pesquisa(cpf) is not None:
+            return False
+        if utilidades.validar_nome(nome) ==True and utilidades.validar_cpf(cpf) ==True:
+            dal.FuncionarioDal.salvar(model.Funcionario(nome , cpf , setor))
+            return True
+        else: return False
+
+    @classmethod
+    def pesquisar_funcionario(cls ,cpf:str):
+        return dal.FuncionarioDal.funcionario_pesquisa(cpf)
+
+    @classmethod
+    def editar_fornecedor(cls ,lupa ,nome , cpf ,setor):
+        if utilidades.validar_nome(nome) == True and utilidades.validar_cpf(cpf) == True:
+            dal.FuncionarioDal.funcionario_editar(lupa ,nome , cpf , setor)
+            return True
+        else: return False
+
+    @classmethod
+    def excluir_fornecedor(cls ,cpf):
+        if dal.FuncionarioDal.funcionario_excluir(cpf) == True:  # noqa: SIM103
+            return True
+        else:return False

@@ -1,1 +1,121 @@
-[]
+[
+    {
+        "produto": "monitor",
+        "quantidade": "30",
+        "valor": "150.00",
+        "pid": "06855",
+        "categoria": "52551"
+    },
+    {
+        "produto": "Headset",
+        "quantidade": "20",
+        "valor": "179.90",
+        "pid": "47312",
+        "categoria": "52551"
+    },
+    {
+        "produto": "Webcam",
+        "quantidade": "12",
+        "valor": "129.90",
+        "pid": "82612",
+        "categoria": "52551"
+    },
+    {
+        "produto": "Detergente",
+        "quantidade": "50",
+        "valor": "2.99",
+        "pid": "74782",
+        "categoria": "38108"
+    },
+    {
+        "produto": "Desinfetante",
+        "quantidade": "30",
+        "valor": "8.50",
+        "pid": "51578",
+        "categoria": "38108"
+    },
+    {
+        "produto": "Água Sanitária",
+        "quantidade": "25",
+        "valor": "5.90",
+        "pid": "83670",
+        "categoria": "38108"
+    },
+    {
+        "produto": "Chocolate",
+        "quantidade": "40",
+        "valor": "6.50",
+        "pid": "47365",
+        "categoria": "85213"
+    },
+    {
+        "produto": "Bala de Morango",
+        "quantidade": "100",
+        "valor": "0.25",
+        "pid": "78621",
+        "categoria": "85213"
+    },
+    {
+        "produto": "Pirulito",
+        "quantidade": "80",
+        "valor": "0.75",
+        "pid": "05603",
+        "categoria": "85213"
+    },
+    {
+        "produto": "Salgadinho de Milho",
+        "quantidade": "30",
+        "valor": "4.50",
+        "pid": "08446",
+        "categoria": "38914"
+    },
+    {
+        "produto": "Batata Chips",
+        "quantidade": "25",
+        "valor": "7.90",
+        "pid": "11576",
+        "categoria": "38914"
+    },
+    {
+        "produto": "Amendoim Salgado",
+        "quantidade": "40",
+        "valor": "5.50",
+        "pid": "83008",
+        "categoria": "38914"
+    },
+    {
+        "produto": "Biscoito Salgado",
+        "quantidade": "35",
+        "valor": "4.00",
+        "pid": "16158",
+        "categoria": "38914"
+    },
+    {
+        "produto": "Água Mineral",
+        "quantidade": "60",
+        "valor": "2.50",
+        "pid": "45516",
+        "categoria": "25125"
+    },
+    {
+        "produto": "Refrigerante 2L",
+        "quantidade": "24",
+        "valor": "9.90",
+        "pid": "03010",
+        "categoria": "25125"
+    },
+    {
+        "produto": "Suco de Uva",
+        "quantidade": "18",
+        "valor": "7.50",
+        "pid": "99255",
+        "categoria": "25125"
+    },
+    {
+        "produto": "Chá Gelado",
+        "quantidade": "20",
+        "valor": "4.90",
+        "pid": "03740",
+        "categoria": "25125"
+    }
+]
