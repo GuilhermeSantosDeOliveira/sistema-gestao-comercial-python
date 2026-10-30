@@ -288,6 +288,55 @@ class ProdutoDal:
 
 
 class VendaDal:
-    arquivo = Path(__file__).parent.parent.parent / "data"/"Venda.json"
+
+    def converter():
+        venda_arquivo = Path(__file__).parent.parent.parent / "data"/"Venda.json"
+        with open(venda_arquivo , "r" ,encoding='utf-8') as arq:
+            Venda = json.load(arq)
+            return Venda
+
+    @classmethod
+    def salvar_vendas(cls , venda:model.venda):
+        venda_arquivo = Path(__file__).parent.parent.parent / "data"/"Venda.json"
+        Venda = cls.converter()
+        v = {"data":venda.data, "pv" :venda.pv , "qv" : venda.qv , "valor": venda.valor , "vid" : venda.vid}
+        Venda.append(v)
+        with open(venda_arquivo , "w" ,encoding='utf-8') as arq:
+            json.dump(Venda,arq,indent=4 ,ensure_ascii=False)
+
+    @classmethod
+    def pesquisa_venda(cls , vid:str , lista=None):
+            if lista == None:
+                lista = cls.converter()
+            for i in lista:
+                if i["vid"] == vid:
+                    return i
+
+    @classmethod
+    def correcao_estoque(cls , lupa_produto, lupa_venda , quantidade=None):
+        Produto = ProdutoDal.converter()
+        Venda = cls.converter()
+        i = ProdutoDal.produto_pesquisa(lupa_produto["pid"] , Produto)
+        v = cls.pesquisa_venda(lupa_venda["vid"], Venda)
+        if i == None:
+            return
+        if v == None:
+            return
+        print(v)
+        print(i)
 
 
+
+VendaDal.correcao_estoque({
+        "produto": "Água Mineral",
+        "quantidade": "60",
+        "valor": "2.50",
+        "pid": "45516",
+        "cp": "25125"
+    } , {
+        "data": "30/10/2026",
+        "pv": "45516",
+        "qv": "2",
+        "valor": "150.00",
+        "vid": "36413"
+    })

@@ -92,7 +92,6 @@ class CategoriaController:
             return True
         else:return False
 
-CategoriaController.excluir_categoria("38108")
 class ProdutoController:
     def criar_pid():
         while True:
@@ -156,3 +155,23 @@ class FuncionarioController:
         if dal.FuncionarioDal.funcionario_excluir(cpf) == True:  # noqa: SIM103
             return True
         else:return False
+
+class VendaController:
+
+    def criar_vid():
+        while True:
+            vid = utilidades.criar_id()
+            if dal.VendaDal.pesquisa_venda(vid) == None:
+                return vid
+            
+    @classmethod
+    def cadastrar_produto(cls ,  data , pv , qv , valor):
+        vid = cls.criar_vid()
+        x = dal.ProdutoDal.produto_pesquisa(pv)
+        if x == None:
+            return False
+        elif x != None:
+            dal.VendaDal.salvar_vendas(model.venda(data , pv , qv , valor , vid))
+            return True
+
+VendaController.cadastrar_produto("30/10/2026", "45516", "2", "150.00")
