@@ -288,12 +288,30 @@ class ProdutoDal:
 
 
 class VendaDal:
+    #Lembrete , vc  vai primeiro arrumar a questão do salvar em vendas para ele alterar a quantia do produto
+    #depois vai terminar a logica de correção no estoque 
 
     def converter():
         venda_arquivo = Path(__file__).parent.parent.parent / "data"/"Venda.json"
         with open(venda_arquivo , "r" ,encoding='utf-8') as arq:
             Venda = json.load(arq)
             return Venda
+
+    def retirada_estoque(cls , lupa ,quantidade):
+        Produto = ProdutoDal.converter()
+        i = cls.produto_pesquisa(lupa["pid"] , Produto)
+        if i == None:
+            return
+        else:
+            q=int(i["quantidade"])
+            if q >= 0 :
+                quantia_atual = str(q - int(quantidade))
+                i["quantidade"] = quantia_atual
+        produto_arquivo = Path(__file__).parent.parent.parent / "data"/"Produto.json"
+        with open(produto_arquivo , "w" ,encoding='utf-8') as arq:
+            json.dump(Produto , arq , indent=4 ,ensure_ascii=False)
+        return True
+
 
     @classmethod
     def salvar_vendas(cls , venda:model.venda):
@@ -327,16 +345,3 @@ class VendaDal:
 
 
 
-VendaDal.correcao_estoque({
-        "produto": "Água Mineral",
-        "quantidade": "60",
-        "valor": "2.50",
-        "pid": "45516",
-        "cp": "25125"
-    } , {
-        "data": "30/10/2026",
-        "pv": "45516",
-        "qv": "2",
-        "valor": "150.00",
-        "vid": "36413"
-    })
