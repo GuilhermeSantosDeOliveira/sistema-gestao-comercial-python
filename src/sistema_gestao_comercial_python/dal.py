@@ -286,7 +286,6 @@ class ProdutoDal:
             json.dump(produto , arq , indent=4 ,ensure_ascii=False)
         return True
 
-
 class VendaDal:
     #depois vai terminar a logica de correção no estoque 
 
@@ -329,7 +328,6 @@ class VendaDal:
                 if i["vid"] == vid:
                     return i
 
-    
     @classmethod
     def valor(cls , lupa , qv):
         produto = ProdutoDal.converter()
@@ -341,17 +339,34 @@ class VendaDal:
             return str(valor)
 
     @classmethod
-    def correcao_estoque(cls , lupa_produto, lupa_venda , quantidade=None):
+    def correcao_estoque(cls , lupa_produto, lupa_venda):
         Produto = ProdutoDal.converter()
         Venda = cls.converter()
         i = ProdutoDal.produto_pesquisa(lupa_produto["pid"] , Produto)
         v = cls.pesquisa_venda(lupa_venda["vid"], Venda)
-        if i == None:
+        if i == None or v == None:
             return
+        else:
+            valor = int(i["quantidade"]) + int(v["qv"])
+            i["quantidade"] = str(valor)
+        produto_arquivo = Path(__file__).parent.parent.parent / "data"/"Produto.json"
+        with open(produto_arquivo , "w" ,encoding='utf-8') as arq:
+            json.dump(Produto , arq , indent=4 ,ensure_ascii=False)
+            
+    @classmethod
+    def editar_venda(cls ,lupa, pv , qv , valor):
+        venda = cls.converter()
+        v = cls.pesquisa_venda(lupa["vid"] , venda)
         if v == None:
             return
-        print(v)
-        print(i)
-
+        else:
+            v["pv"]=pv
+            v["qv"]=qv
+            v["valor"]=valor
+        venda_arquivo = Path(__file__).parent.parent.parent / "data"/"Venda.json"
+        with open(venda_arquivo , "w" ,encoding='utf-8') as arq:
+            json.dump(venda , arq , indent=4 , ensure_ascii=False)
+        return True
+        
 
 

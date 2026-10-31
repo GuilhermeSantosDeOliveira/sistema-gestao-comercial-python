@@ -176,4 +176,18 @@ class VendaController:
                 dal.VendaDal.salvar_vendas(model.venda(data , pv , qv , valor , vid))
                 return True
 
-VendaController.cadastrar_venda("30|10|2026" , "47312" , "5")
+    @classmethod
+    def editar_venda(cls , pv , vid ,qv):
+        x = dal.ProdutoDal.produto_pesquisa(pv)
+        v = dal.VendaDal.pesquisa_venda(vid)
+        valor = dal.VendaDal.valor(x , qv)
+        if x == None:
+            return False
+        elif x != None:
+            dal.VendaDal.correcao_estoque(x , v)
+            if dal.VendaDal.retirada_estoque(x , qv)== True:
+                dal.VendaDal.editar_venda(v , pv , qv , valor)
+                return True
+            else:return False
+
+VendaController.editar_venda("45516","36413", "4")
