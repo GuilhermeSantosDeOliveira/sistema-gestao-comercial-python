@@ -165,15 +165,15 @@ class VendaController:
                 return vid
             
     @classmethod
-    def cadastrar_venda(cls ,  data , pv , qv , valor):
+    def cadastrar_venda(cls ,  data , pv , qv):
         vid = cls.criar_vid()
         x = dal.ProdutoDal.produto_pesquisa(pv)
+        valor = dal.VendaDal.valor(x , qv)
         if x == None:
             return False
         elif x != None:
-            lupa = dal.ProdutoDal.produto_pesquisa(pv)
-            if dal.VendaDal.retirada_estoque(lupa , qv) ==  True:
+            if dal.VendaDal.retirada_estoque(x , qv) ==  True:
                 dal.VendaDal.salvar_vendas(model.venda(data , pv , qv , valor , vid))
                 return True
 
-VendaController.cadastrar_produto("30/10/2026", "45516", "2", "150.00")
+VendaController.cadastrar_venda("30|10|2026" , "47312" , "5")

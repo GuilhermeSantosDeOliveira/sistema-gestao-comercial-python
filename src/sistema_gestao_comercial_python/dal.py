@@ -288,7 +288,6 @@ class ProdutoDal:
 
 
 class VendaDal:
-    #Lembrete , vc  vai primeiro arrumar a questão do salvar em vendas para ele alterar a quantia do produto
     #depois vai terminar a logica de correção no estoque 
 
     def converter():
@@ -297,21 +296,21 @@ class VendaDal:
             Venda = json.load(arq)
             return Venda
 
-    def retirada_estoque(cls , lupa ,quantidade):
+    @classmethod
+    def retirada_estoque(cls , lupa ,qv):
         Produto = ProdutoDal.converter()
-        i = cls.produto_pesquisa(lupa["pid"] , Produto)
+        i = ProdutoDal.produto_pesquisa(lupa["pid"] , Produto)
         if i == None:
             return
         else:
             q=int(i["quantidade"])
             if q >= 0 :
-                quantia_atual = str(q - int(quantidade))
+                quantia_atual = str(q - int(qv))
                 i["quantidade"] = quantia_atual
         produto_arquivo = Path(__file__).parent.parent.parent / "data"/"Produto.json"
         with open(produto_arquivo , "w" ,encoding='utf-8') as arq:
             json.dump(Produto , arq , indent=4 ,ensure_ascii=False)
         return True
-
 
     @classmethod
     def salvar_vendas(cls , venda:model.venda):
@@ -329,6 +328,17 @@ class VendaDal:
             for i in lista:
                 if i["vid"] == vid:
                     return i
+
+    
+    @classmethod
+    def valor(cls , lupa , qv):
+        produto = ProdutoDal.converter()
+        i = ProdutoDal.produto_pesquisa(lupa["pid"] , produto)
+        if i == None:
+            return
+        else:
+            valor = float(i["valor"]) * int(qv)
+            return str(valor)
 
     @classmethod
     def correcao_estoque(cls , lupa_produto, lupa_venda , quantidade=None):
