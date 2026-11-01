@@ -35,10 +35,12 @@ class venda:
     #vid é o ID da venda 
     #pv é o produto vendido
     #qv é a quantidade vendida
-    def __init__(self , data , pv , qv , valor , vid):
+    def __init__(self , data , pv , qv , valor , vid, cpf=None):
         self.data = data
         self.pv = pv
         self.qv = qv
         self.valor = valor
         self.vid = vid
+        if cpf is not None:
+            self.cpf = cpf
 

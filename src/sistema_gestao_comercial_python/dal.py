@@ -316,18 +316,25 @@ class VendaDal:
     def salvar_vendas(cls , venda:model.venda):
         venda_arquivo = Path(__file__).parent.parent.parent / "data"/"Venda.json"
         Venda = cls.converter()
-        v = {"data":venda.data, "pv" :venda.pv , "qv" : venda.qv , "valor": venda.valor , "vid" : venda.vid}
+        v = {"data":venda.data, "pv" :venda.pv , "qv" : venda.qv , "valor": venda.valor , "vid" : venda.vid , "cpf":venda.valor}
         Venda.append(v)
         with open(venda_arquivo , "w" ,encoding='utf-8') as arq:
             json.dump(Venda,arq,indent=4 ,ensure_ascii=False)
 
     @classmethod
-    def pesquisa_venda(cls , vid:str , lista=None):
+    def pesquisa_venda(cls , busca:str ,lista=None):
             if lista == None:
                 lista = cls.converter()
-            for i in lista:
-                if i["vid"] == vid:
-                    return i
+            if len(busca) < 6:
+                for i in lista:
+                    if i["vid"] == busca:
+                        return i
+            elif len(busca) > 6:
+                compras = []
+                for v in lista:
+                    if v["cpf"] == busca:
+                        compras.append(v)
+                return compras
 
     @classmethod
     def valor(cls , lupa , qv):
@@ -381,4 +388,13 @@ class VendaDal:
             if di <= data <= df:
                 filtro.append(i)
         return filtro
+
+    @classmethod
+    def relatorio_geral(cls):
+        lista = cls.converter()
+        return lista
+
+    
+
+
 

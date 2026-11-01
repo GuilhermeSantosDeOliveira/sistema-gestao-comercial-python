@@ -167,7 +167,7 @@ class VendaController:
                 return vid
             
     @classmethod
-    def cadastrar_venda(cls , pv , qv):
+    def cadastrar_venda(cls , pv , qv , cpf=None):
         d = datetime.datetime.now()
         data= str(d.strftime("%d/%m/%Y"))
         vid = cls.criar_vid()
@@ -175,6 +175,9 @@ class VendaController:
         valor = dal.VendaDal.valor(x , qv)
         if x == None:
             return False
+        elif cpf!= None and dal.PessoaDal.pesquisa(cpf) != None and x !=None and dal.VendaDal.retirada_estoque(x , qv) ==  True:
+            dal.VendaDal.salvar_vendas(model.venda(data , pv , qv , valor , vid , cpf))
+            return True
         elif x != None and dal.VendaDal.retirada_estoque(x , qv) ==  True:
             dal.VendaDal.salvar_vendas(model.venda(data , pv , qv , valor , vid))
             return True
@@ -200,6 +203,29 @@ class VendaController:
             if not i:
                 return False
             else:
-                return i
+                lucro = 0
+                produtos = 0
+                vendas = 0
+                for v in i:
+                    lucro = lucro + float(v["valor"])
+                    produtos = produtos + int(v["qv"])
+                    vendas = vendas + 1
+                return lucro , produtos , vendas
         except ValueError:
             return False
+
+    @classmethod
+    def relatorio_geral(cls):
+        r = dal.VendaDal.relatorio_geral()
+        lucro = 0
+        produtos = 0
+        vendas = 0
+        for v in r:
+            lucro = lucro + float(v["valor"])
+            produtos = produtos + int(v["qv"])
+            vendas = vendas + 1
+        return lucro , produtos , vendas        
+
+
+v = VendaController.relatorio_geral()
+print(v[0] , v[1] , v[2])
