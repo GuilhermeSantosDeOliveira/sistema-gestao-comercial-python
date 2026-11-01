@@ -1,3 +1,5 @@
+import datetime
+
 import dal
 import model
 import utilidades
@@ -165,16 +167,17 @@ class VendaController:
                 return vid
             
     @classmethod
-    def cadastrar_venda(cls ,  data , pv , qv):
+    def cadastrar_venda(cls , pv , qv):
+        d = datetime.datetime.now()
+        data= str(d.strftime("%d/%m/%Y"))
         vid = cls.criar_vid()
         x = dal.ProdutoDal.produto_pesquisa(pv)
         valor = dal.VendaDal.valor(x , qv)
         if x == None:
             return False
-        elif x != None:
-            if dal.VendaDal.retirada_estoque(x , qv) ==  True:
-                dal.VendaDal.salvar_vendas(model.venda(data , pv , qv , valor , vid))
-                return True
+        elif x != None and dal.VendaDal.retirada_estoque(x , qv) ==  True:
+            dal.VendaDal.salvar_vendas(model.venda(data , pv , qv , valor , vid))
+            return True
 
     @classmethod
     def editar_venda(cls , pv , vid ,qv):
@@ -190,4 +193,13 @@ class VendaController:
                 return True
             else:return False
 
-VendaController.editar_venda("45516","36413", "4")
+    @classmethod
+    def filtro_data(cls , di , df):
+        try:
+            i = dal.VendaDal.filtro_data(di , df)
+            if not i:
+                return False
+            else:
+                return i
+        except ValueError:
+            return False

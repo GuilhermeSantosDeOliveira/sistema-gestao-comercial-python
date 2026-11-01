@@ -1,3 +1,4 @@
+import datetime
 import json
 from pathlib import Path
 
@@ -369,4 +370,15 @@ class VendaDal:
         return True
         
 
+    @classmethod
+    def filtro_data(cls , di , df): #di é a data de inicio e df é a data final
+        lista = cls.converter()
+        filtro = []
+        di = datetime.datetime.strptime(di, "%d/%m/%Y").date()
+        df = datetime.datetime.strptime(df, "%d/%m/%Y").date()
+        for i in lista:
+            data = datetime.datetime.strptime(i["data"], "%d/%m/%Y").date()
+            if di <= data <= df:
+                filtro.append(i)
+        return filtro
 
