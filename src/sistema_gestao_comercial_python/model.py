@@ -44,3 +44,4 @@ class venda:
         if cpf is not None:
             self.cpf = cpf
 
+    

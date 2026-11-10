@@ -288,7 +288,6 @@ class ProdutoDal:
         return True
 
 class VendaDal:
-    #depois vai terminar a logica de correção no estoque 
 
     def converter():
         venda_arquivo = Path(__file__).parent.parent.parent / "data"/"Venda.json"
@@ -322,7 +321,7 @@ class VendaDal:
             json.dump(Venda,arq,indent=4 ,ensure_ascii=False)
 
     @classmethod
-    def pesquisa_venda(cls , busca:str ,lista=None):
+    def pesquisa_venda(cls , busca:str ,lista=None): #buscar pelo cpf retorna uma lista então isso devera ser melhor tratado para aparecer na view 
             if lista == None:
                 lista = cls.converter()
             if len(busca) < 6:
@@ -394,7 +393,24 @@ class VendaDal:
         lista = cls.converter()
         return lista
 
-    
+    @classmethod
+    def relatorio_produto(cls):
+        lista = cls.converter()
+        filtro = [{"pv": "0" , "quantia": 0}]
+        for i in lista:
+            p_atual = i['pv']
+            quantia = int(i['qv'])
+            encontrou = False
+            for p in filtro:
+                if p["pv"] == p_atual:
+                    p["quantia"] = quantia + int(p["quantia"])
+                    encontrou = True
+                    break
+            if encontrou == False:
+                    add = {"pv" : p_atual , "quantia" : quantia}
+                    filtro.append(add)
+        return filtro
+
 
 
 

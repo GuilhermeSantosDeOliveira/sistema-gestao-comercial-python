@@ -226,6 +226,3 @@ class VendaController:
             vendas = vendas + 1
         return lucro , produtos , vendas        
 
-
-v = VendaController.relatorio_geral()
-print(v[0] , v[1] , v[2])
