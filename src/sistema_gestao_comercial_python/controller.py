@@ -226,3 +226,13 @@ class VendaController:
             vendas = vendas + 1
         return lucro , produtos , vendas        
 
+    @classmethod
+    def relatorio_produto(cls):
+        r = dal.VendaDal.relatorio_produto()
+        posicao = 0
+        for i in r:
+            p = dal.ProdutoDal.produto_pesquisa(i["pv"])
+            posicao = posicao +1
+            print(f"{posicao}º {p["produto"]} com o id {i["pv"]} , foram vendidos {i["quantia"]}")
+
+VendaController.relatorio_produto()

@@ -411,7 +411,3 @@ class VendaDal:
                     filtro.append(add)
         ordenado=(sorted(filtro,key=lambda p: p["quantia"], reverse=True))
         return ordenado
-
-
-
-print(VendaDal.relatorio_produto())
