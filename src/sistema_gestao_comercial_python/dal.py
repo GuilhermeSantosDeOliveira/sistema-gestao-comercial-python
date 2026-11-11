@@ -409,8 +409,9 @@ class VendaDal:
             if encontrou == False:
                     add = {"pv" : p_atual , "quantia" : quantia}
                     filtro.append(add)
-        return filtro
+        ordenado=(sorted(filtro,key=lambda p: p["quantia"], reverse=True))
+        return ordenado
 
 
 
-
+print(VendaDal.relatorio_produto())
