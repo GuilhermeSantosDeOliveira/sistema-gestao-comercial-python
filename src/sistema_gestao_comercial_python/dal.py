@@ -315,7 +315,7 @@ class VendaDal:
     def salvar_vendas(cls , venda:model.venda):
         venda_arquivo = Path(__file__).parent.parent.parent / "data"/"Venda.json"
         Venda = cls.converter()
-        v = {"data":venda.data, "pv" :venda.pv , "qv" : venda.qv , "valor": venda.valor , "vid" : venda.vid , "cpf":venda.valor}
+        v = {"data":venda.data, "pv" :venda.pv , "qv" : venda.qv , "valor": venda.valor , "vid" : venda.vid , "cpf":venda.cpf}
         Venda.append(v)
         with open(venda_arquivo , "w" ,encoding='utf-8') as arq:
             json.dump(Venda,arq,indent=4 ,ensure_ascii=False)
@@ -396,13 +396,15 @@ class VendaDal:
     @classmethod
     def relatorio_produto(cls):
         lista = cls.converter()
-        filtro = [{"pv": "0" , "quantia": 0}]
+        filtro = []
         for i in lista:
             p_atual = i['pv']
             quantia = int(i['qv'])
             encontrou = False
             for p in filtro:
-                if p["pv"] == p_atual:
+                if filtro == None:
+                    break
+                elif p["pv"] == p_atual:
                     p["quantia"] = quantia + int(p["quantia"])
                     encontrou = True
                     break

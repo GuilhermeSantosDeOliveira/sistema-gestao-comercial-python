@@ -1,91 +1,91 @@
 [
     {
         "produto": "monitor",
-        "quantidade": "30",
+        "quantidade": "27",
         "valor": "150.00",
         "pid": "06855",
         "cp": "52551"
     },
     {
         "produto": "Headset",
-        "quantidade": "15",
+        "quantidade": "9",
         "valor": "179.90",
         "pid": "47312",
         "cp": "52551"
     },
     {
         "produto": "Webcam",
-        "quantidade": "12",
+        "quantidade": "11",
         "valor": "129.90",
         "pid": "82612",
         "cp": "52551"
     },
     {
         "produto": "Chocolate",
-        "quantidade": "40",
+        "quantidade": "35",
         "valor": "6.50",
         "pid": "47365",
         "cp": "85213"
     },
     {
         "produto": "Bala de Morango",
-        "quantidade": "100",
+        "quantidade": "99",
         "valor": "0.25",
         "pid": "78621",
         "cp": "85213"
     },
     {
         "produto": "Pirulito",
-        "quantidade": "80",
+        "quantidade": "78",
         "valor": "0.75",
         "pid": "05603",
         "cp": "85213"
     },
     {
         "produto": "Salgadinho de Milho",
-        "quantidade": "30",
+        "quantidade": "24",
         "valor": "4.50",
         "pid": "08446",
         "cp": "38914"
     },
     {
         "produto": "Batata Chips",
-        "quantidade": "25",
+        "quantidade": "23",
         "valor": "7.90",
         "pid": "11576",
         "cp": "38914"
     },
     {
         "produto": "Amendoim Salgado",
-        "quantidade": "40",
+        "quantidade": "36",
         "valor": "5.50",
         "pid": "83008",
         "cp": "38914"
     },
     {
         "produto": "Biscoito Salgado",
-        "quantidade": "35",
+        "quantidade": "33",
         "valor": "4.00",
         "pid": "16158",
         "cp": "38914"
     },
     {
         "produto": "Água Mineral",
-        "quantidade": "60",
+        "quantidade": "48",
         "valor": "2.50",
         "pid": "45516",
         "cp": "25125"
     },
     {
         "produto": "Refrigerante 2L",
-        "quantidade": "18",
+        "quantidade": "16",
         "valor": "9.90",
         "pid": "03010",
         "cp": "25125"
     },
     {
         "produto": "Suco de Uva",
-        "quantidade": "18",
+        "quantidade": "14",
         "valor": "7.50",
         "pid": "99255",
         "cp": "25125"

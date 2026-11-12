@@ -235,4 +235,3 @@ class VendaController:
             posicao = posicao +1
             print(f"{posicao}º {p["produto"]} com o id {i["pv"]} , foram vendidos {i["quantia"]}")
 
-VendaController.relatorio_produto()
