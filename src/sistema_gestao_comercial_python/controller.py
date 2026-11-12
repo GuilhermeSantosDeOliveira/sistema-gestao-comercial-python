@@ -244,4 +244,3 @@ class VendaController:
             posicao = posicao +1
             print(f"{posicao}º {p["nome"]} com o id {i["cpf"]} , foram vendidos {i["quantia"]}")
 
-
