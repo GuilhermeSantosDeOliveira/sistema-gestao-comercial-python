@@ -235,3 +235,13 @@ class VendaController:
             posicao = posicao +1
             print(f"{posicao}º {p["produto"]} com o id {i["pv"]} , foram vendidos {i["quantia"]}")
 
+    @classmethod
+    def relatorio_cliente(cls):
+        r = dal.VendaDal.relatorio_clientes()
+        posicao = 0
+        for i in r:
+            p = dal.PessoaDal.pesquisa(i["cpf"])
+            posicao = posicao +1
+            print(f"{posicao}º {p["nome"]} com o id {i["cpf"]} , foram vendidos {i["quantia"]}")
+
+

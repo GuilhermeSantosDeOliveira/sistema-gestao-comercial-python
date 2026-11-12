@@ -41,7 +41,6 @@ class venda:
         self.qv = qv
         self.valor = valor
         self.vid = vid
-        if cpf is not None:
-            self.cpf = cpf
+        self.cpf = cpf
 
     

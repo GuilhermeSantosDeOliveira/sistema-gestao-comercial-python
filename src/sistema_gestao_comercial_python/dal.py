@@ -413,3 +413,26 @@ class VendaDal:
                     filtro.append(add)
         ordenado=(sorted(filtro,key=lambda p: p["quantia"], reverse=True))
         return ordenado
+
+    @classmethod
+    def relatorio_clientes(cls):
+        lista = cls.converter()
+        filtro = []
+        for i in lista:
+            cpf_atual = i['cpf']
+            quantia = int(i['qv'])
+            encontrou = False
+            if i.get("cpf") is None:
+                continue
+            for p in filtro:
+                if filtro == None:
+                    break
+                elif p["cpf"] == cpf_atual:
+                    p["quantia"] = quantia + int(p["quantia"])
+                    encontrou = True
+                    break
+            if encontrou == False:
+                    add = {"cpf" : cpf_atual , "quantia" : quantia}
+                    filtro.append(add)
+        ordenado=(sorted(filtro,key=lambda p: p["quantia"], reverse=True))
+        return ordenado
