@@ -120,10 +120,10 @@ def fornecedor():
                         if lupa == None: 
                             print("cpf não encontrado")
                             break
-                        desicao = int(input(f"a pessoa que encontramos é {lupa["nome"]} pertencente ao cpf {lupa["cpf"]} é essa mesmo que deseja editar? 1 para sim e 2 para não : "))
-                        if desicao == 2:
+                        confirme = int(input(f"a pessoa que encontramos é {lupa["nome"]} pertencente ao cpf {lupa["cpf"]} é essa mesmo que deseja editar? 1 para sim e 2 para não : "))
+                        if confirme == 2:
                             break
-                        elif desicao ==1:
+                        elif confirme ==1:
                             nome = input("digite um novo nome: ")
                             cpf = input("digite um novo cpf: ")
                             fproduto = input("digite o novo produto fornecido")
@@ -138,16 +138,94 @@ def fornecedor():
                             print("não encontramos a pessoa desejada , você será redirecionado para o Menu pessoas")
                             break
                         print(f"a pessoa que achamos é {lupa["nome"]} pertencente ao cpf: {lupa["cpf"]} e o produto fornecido é {lupa["produto_fornecido"]}")
-                        desicao = int(input("essa é a pessoa que deseja deletar? 1 para Sim e 2 para Não : "))
-                        if desicao == 1:
+                        confirme = int(input("essa é a pessoa que deseja deletar? 1 para Sim e 2 para Não : "))
+                        if confirme == 1:
                             if controller.FornecedorController.excluir_fornecedor(cpf) == True:
                                 print("cadastro deletado com sucesso!")
                                 break
-                        elif desicao ==2:
+                        elif confirme ==2:
                             print("ok! você será redirecionado para o menu pessoas")
                             break
         except ValueError: 
             print("digite um valor valido")
             continue
 
-
+def funcionario():
+    while True:
+        print("----MENU DE FUNCIONARIOS----")
+        print("--digite 1 para pesquisar um funcionario--")
+        print("--digite 2 para cadastrar um funcionario--")
+        print("--digite 3 para editar um funcionario--")
+        print("--digite 4 para excluir um funcionario--")
+        print("--digite 0 para sair do menu de funcionario--")
+        try:
+            desicao = int(input("digite o numero desejado : "))
+        except ValueError:
+            print("digite um valor aceitavel")
+            continue
+        if desicao == 0:
+            break
+        try:
+            while True:
+                if desicao not in[1 ,2 ,3,4,0]:
+                    print("numero invalido , você retornara ao menu de funcionario")
+                    break
+                elif desicao == 1:
+                    cpf = input("digite o cpf desejado para buscar o funcionario: ")
+                    f = controller.FuncionarioController.pesquisar_funcionario(cpf)
+                    if f is not None:
+                        print(f"achamos o funcionario! \n nome : {f["nome"]} \n cpf : {f["cpf"]} \n pertence ao setor: {f["setor"]}")
+                        break
+                    else:
+                        print("não achamos nenhum funcionario com este cpf")
+                        break
+                elif desicao==2:
+                    nome = input("digite o nome que deseja cadastrar: ")
+                    cpf = input("digite o cpf da pessoa que deseja cadastrar: ")
+                    setor = input("digite o setor")
+                    confirme = int(input(f"verifique as informações:\n o nome é : {nome} \n o cpf é : {cpf} \n o setor é {setor} \n digite 1 para confirmar ou 2 para  recusar: "))
+                    if confirme == 1:
+                        if controller.FuncionarioController.cadastrar_funcionario(nome , cpf , setor) == True:
+                            print(f"o nome: {nome} pertencente ao cpf: {cpf} e do setor {setor} foi cadastrado com sucesso")
+                            break
+                        else:
+                            print("o cadastro falhou")
+                            break
+                    elif confirme==2:
+                        print("OK! , você está sendo redirecionado para o Menu Funcionarios")
+                        break                
+                elif desicao==3:
+                    cpf = str(input("procure o fornecedor que deseja fazer a edição pelo cpf: "))
+                    lupa = controller.FuncionarioController.pesquisar_funcionario(cpf)
+                    if lupa == None: 
+                        print("cpf não encontrado")
+                        break
+                    confirme = int(input(f"a pessoa que encontramos é {lupa["nome"]} pertencente ao cpf {lupa["cpf"]} é essa mesmo que deseja editar? 1 para sim e 2 para não : "))
+                    if confirme == 2:
+                        break
+                    elif confirme ==1:
+                        nome = input("digite um novo nome: ")
+                        cpf = input("digite um novo cpf: ")
+                        setor = input("digite o novo setor: ")
+                        if controller.FornecedorController.editar_funcionario(lupa , nome , cpf , setor) == True:
+                            print("cadastro alterado com sucesso")
+                            break
+                        else: print("edição falhou")
+                elif desicao==4:
+                    cpf = input("digite um cpf para procurar o funcionario que deseja deletar o cadastro: ")
+                    lupa = controller.FuncionarioController.pesquisar_funcionario(cpf)
+                    if lupa == None:
+                        print("não encontramos a pessoa desejada , você será redirecionado para o Menu Funcionario")
+                        break
+                    print(f"a pessoa que achamos é {lupa["nome"]} pertencente ao cpf: {lupa["cpf"]} e o setor é {lupa["setor"]}")
+                    confirme = int(input("essa é a pessoa que deseja deletar? 1 para Sim e 2 para Não : "))
+                    if confirme == 1:
+                        if controller.FuncionarioController.excluir_funcionario(cpf) == True:
+                            print("cadastro deletado com sucesso!")
+                            break
+                    elif confirme ==2:
+                        print("ok! você será redirecionado para o menu funcionario")
+                        break
+        except ValueError: 
+            print("digite um valor valido")
+            continue

@@ -146,14 +146,14 @@ class FuncionarioController:
         return dal.FuncionarioDal.funcionario_pesquisa(cpf)
 
     @classmethod
-    def editar_fornecedor(cls ,lupa ,nome , cpf ,setor):
+    def editar_funcionario(cls ,lupa ,nome , cpf ,setor):
         if utilidades.validar_nome(nome) == True and utilidades.validar_cpf(cpf) == True:
             dal.FuncionarioDal.funcionario_editar(lupa ,nome , cpf , setor)
             return True
         else: return False
 
     @classmethod
-    def excluir_fornecedor(cls ,cpf):
+    def excluir_funcionario(cls ,cpf):
         if dal.FuncionarioDal.funcionario_excluir(cpf) == True:  # noqa: SIM103
             return True
         else:return False
@@ -244,3 +244,11 @@ class VendaController:
             posicao = posicao +1
             print(f"{posicao}º {p["nome"]} com o id {i["cpf"]} , foram vendidos {i["quantia"]}")
 
+
+
+FuncionarioController.cadastrar_funcionario("Lucas Henrique Almeida", "52998224725", "Financeiro")
+FuncionarioController.cadastrar_funcionario("Mariana Costa Ferreira", "11144477735", "Recursos Humanos")
+FuncionarioController.cadastrar_funcionario("Pedro Augusto Martins", "93541134780", "Estoque")
+FuncionarioController.cadastrar_funcionario("Beatriz Oliveira Santos", "16899535009", "Comercial")
+FuncionarioController.cadastrar_funcionario("Gabriel Rodrigues Lima", "98765432100", "Administrativo")
+FuncionarioController.cadastrar_funcionario("Ana Carolina Ribeiro", "12345678909", "Vendas")

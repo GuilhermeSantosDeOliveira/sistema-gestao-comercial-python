@@ -10,7 +10,7 @@ class Fornecedor(Pessoa):
         self.fproduto = fproduto
         
 class Funcionario(Pessoa):
-    def funcionario(self ,nome , cpf , setor):
+    def __init__(self ,nome , cpf , setor):
         super().__init__(nome , cpf)
         self.setor = setor
         

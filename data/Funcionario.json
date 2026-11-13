@@ -1,1 +1,32 @@
-[]
+[
+    {
+        "nome": "Lucas Henrique Almeida",
+        "cpf": "52998224725",
+        "setor": "Financeiro"
+    },
+    {
+        "nome": "Mariana Costa Ferreira",
+        "cpf": "11144477735",
+        "setor": "Recursos Humanos"
+    },
+    {
+        "nome": "Pedro Augusto Martins",
+        "cpf": "93541134780",
+        "setor": "Estoque"
+    },
+    {
+        "nome": "Beatriz Oliveira Santos",
+        "cpf": "16899535009",
+        "setor": "Comercial"
+    },
+    {
+        "nome": "Gabriel Rodrigues Lima",
+        "cpf": "98765432100",
+        "setor": "Administrativo"
+    },
+    {
+        "nome": "Ana Carolina Ribeiro",
+        "cpf": "12345678909",
+        "setor": "Vendas"
+    }
+]
